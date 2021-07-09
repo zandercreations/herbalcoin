@@ -1,0 +1,76 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: supplychainvalidator1ibft
+  namespace: supplychain-bes
+  annotations:
+    flux.weave.works/automated: "false"
+spec:
+  releaseName: supplychainvalidator1ibft
+  chart:
+    git: https://github.com/zandercreations/herbalcoin.git
+    ref: main
+    path: platforms/hyperledger-besu/charts/node_validator 
+  values:
+    replicaCount: 1
+
+    healthcheck:
+      readinessthreshold: 100
+      readinesscheckinterval: 5
+
+    staticnodes:
+      - "enode://1224e3a57f311e97a11b3dbe5e8550f1cfa5424944726943ba4b9e0902a2037c5c48c63b15fa0295a0b0d64c4c3978bd068ad8ca4cd65e18f6f9b2b7dbc34e92@validator1.bc.myherbalway.com:15010"
+      
+      - "enode://d0e6420cf472ef1c5c6c87f41778d5d2e1f98b5fc2e12d61239db0c34e08c43e3c662bcb91206dde5fd3398caf007e5466049eadeeb8597f2fae06ad4d0d0c6b@validator2.bc.myherbalway.com:15012"
+      
+      - "enode://471c6560aa127b0516754812a50da7d0d327cd77733fd8c13331606331cfe2c86ab70e086ca6aa75f4935a0f126901fd7c72be286d713b5710709e36dfc2ef76@validator3.bc.myherbalway.com:15014"
+      
+      - "enode://1d66091773b611a52add287c254d8f5310ff5a24f44101fdb39a5691eddee8f5d9c1473a26c5b846821c684d038697479be25918a89f022ad51369a76f55a60a@validator4.bc.myherbalway.com:15016"
+      
+
+    metadata:
+      namespace: supplychain-bes
+      labels:
+
+    ambassador:
+      external_url_suffix: bc.myherbalway.com
+
+    liveliness_check:
+      enabled: false
+
+    proxy:
+      provider: ambassador
+      external_url: supplychain.bc.myherbalway.com
+      p2p: 15010
+      rpc: 15011
+
+    images:
+      node: hyperledger/besu:21.1.1
+      alpineutils: hyperledgerlabs/alpine-utils:1.0
+
+    node:
+      name: validator1
+      tls: True
+      consensus: ibft
+      mountPath: /opt/besu/data
+      servicetype: ClusterIP
+      imagePullSecret: regcred
+      ports:
+        p2p: 30303
+        rpc: 8545
+        ws: 8546
+
+    storage:
+      storageclassname: awsstorageclass
+      storagesize: 1Gi
+
+    vault:
+      address: https://bcv.syncoin.io/
+      secretprefix: cubbyhole/data/supplychain-bes/crypto/validator1
+      serviceaccountname: vault-auth
+      keyname: data
+      tlsdir: tls
+      role: vault-role
+      authpath: besusupplychain
+
+    genesis: ewogICJjb25maWciOiB7CiAgICAiY2hhaW5JZCI6IDIwMTgsCiAgICAiY29uc3RhbnRpbm9wbGVmaXhibG9jayI6IDAsCiAgICAiY29udHJhY3RTaXplTGltaXQiOiAyMTQ3NDgzNjQ3LAogICAgImliZnQyIjogewogICAgICAiYmxvY2twZXJpb2RzZWNvbmRzIjogMiwKICAgICAgImVwb2NobGVuZ3RoIjogMzAwMDAsCiAgICAgICJyZXF1ZXN0dGltZW91dHNlY29uZHMiOiAxMAogICAgfQogIH0sCiAgIm5vbmNlIjogIjB4MCIsCiAgInRpbWVzdGFtcCI6ICIweDU4ZWU0MGJhIiwKICAiZ2FzTGltaXQiOiAiMHgxZmZmZmZmZmZmZmZmZiIsCiAgImRpZmZpY3VsdHkiOiAiMHgxIiwKICAiZXh0cmFEYXRhIjogIjB4Zjg3ZWEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMGY4NTQ5NDA4NzY3MTk1MjIzODEwMDYxYTM4OWI0MWIyZjRlYTMwOGQwZTlmZGQ5NDkyOGE2NjhiYWE5ZmQ4OTViNzIyZjc4YjJmNGE0MDA0NDlmZWIyN2I5NDFkOTY4YWI0ZGM2YjBiMTg3NGM1MTk2ODUxMjQyNWJlY2E3NjRkODg5NDFkYzQ3ZmI5ZmQyMTQxMDM2YmRmMDEwN2U0NjdlNzY3ZWJmYTBmMjA4MDg0MDAwMDAwMDBjMCIKfQ==
