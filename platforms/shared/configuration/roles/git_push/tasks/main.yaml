@@ -47,7 +47,7 @@
     fi  
     
     git --git-dir={{ GIT_DIR }}/.git commit -s -m "{{ msg }}" || true
-    git --git-dir={{ GIT_DIR }}/.git push https://{{ gitops.username }}:{{ gitops.password }}@{{ gitops.git_repo }} HEAD:{{ gitops.branch }} --force
+    git --git-dir={{ GIT_DIR }}/.git push https://{{ gitops.username }}:{{ gitops.password }}@{{ gitops.git_repo }} HEAD:{{ gitops.branch }} --force --force
   
   register: GIT_OUTPUT
   when: gitops.git_protocol is not defined or gitops.git_protocol == "https"
