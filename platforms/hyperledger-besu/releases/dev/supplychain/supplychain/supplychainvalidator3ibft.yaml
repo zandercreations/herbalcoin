@@ -19,13 +19,13 @@ spec:
       readinesscheckinterval: 5
 
     staticnodes:
-      - "enode://1224e3a57f311e97a11b3dbe5e8550f1cfa5424944726943ba4b9e0902a2037c5c48c63b15fa0295a0b0d64c4c3978bd068ad8ca4cd65e18f6f9b2b7dbc34e92@validator1.bc.myherbalway.com:15010"
+      - "enode://a4e6e3932b0f485ff7099b3272b08345e4a4540e51e69289d85eb58ea24d8d19bca36f2639b1bca6d061aa63d5cb6f39a60a56e34a6a2531188b8cab8dcd651e@validator1.bc.myherbalway.com:15010"
       
-      - "enode://d0e6420cf472ef1c5c6c87f41778d5d2e1f98b5fc2e12d61239db0c34e08c43e3c662bcb91206dde5fd3398caf007e5466049eadeeb8597f2fae06ad4d0d0c6b@validator2.bc.myherbalway.com:15012"
+      - "enode://bad768bc785452b425a0714b5950ff719e9f971291feae1ce1b822f1f32778cad80c8af50cea9cd3891284fa9040b40e7353072f10e55b1dd1399de06e894a04@validator2.bc.myherbalway.com:15012"
       
-      - "enode://471c6560aa127b0516754812a50da7d0d327cd77733fd8c13331606331cfe2c86ab70e086ca6aa75f4935a0f126901fd7c72be286d713b5710709e36dfc2ef76@validator3.bc.myherbalway.com:15014"
+      - "enode://c2193c7f3c13fbe8cb904fdccba25a95e8a92b05a44c99b303f3f9b1ddd19680e45164c772407d07ac24c5efb1255cacb6a589648e1b9a932b77cba5a2455ef2@validator3.bc.myherbalway.com:15014"
       
-      - "enode://1d66091773b611a52add287c254d8f5310ff5a24f44101fdb39a5691eddee8f5d9c1473a26c5b846821c684d038697479be25918a89f022ad51369a76f55a60a@validator4.bc.myherbalway.com:15016"
+      - "enode://ad73f0fa002061b200ed265c3ccd46a52b8b30c4597c18ac020661bb39f68d6cb6131c3eae902c50899522950203d35daf61a83cbc66eee0c71ef83845b6f812@validator4.bc.myherbalway.com:15016"
       
 
     metadata:
@@ -50,7 +50,7 @@ spec:
 
     node:
       name: validator3
-      tls: True
+      tls: False
       consensus: ibft
       mountPath: /opt/besu/data
       servicetype: ClusterIP
@@ -66,11 +66,11 @@ spec:
 
     vault:
       address: https://bcv.syncoin.io/
-      secretprefix: cubbyhole/data/supplychain-bes/crypto/validator3
+      secretprefix: herbalway/data/supplychain-bes/crypto/validator3
       serviceaccountname: vault-auth
       keyname: data
       tlsdir: tls
       role: vault-role
       authpath: besusupplychain
 
-    genesis: ewogICJjb25maWciOiB7CiAgICAiY2hhaW5JZCI6IDIwMTgsCiAgICAiY29uc3RhbnRpbm9wbGVmaXhibG9jayI6IDAsCiAgICAiY29udHJhY3RTaXplTGltaXQiOiAyMTQ3NDgzNjQ3LAogICAgImliZnQyIjogewogICAgICAiYmxvY2twZXJpb2RzZWNvbmRzIjogMiwKICAgICAgImVwb2NobGVuZ3RoIjogMzAwMDAsCiAgICAgICJyZXF1ZXN0dGltZW91dHNlY29uZHMiOiAxMAogICAgfQogIH0sCiAgIm5vbmNlIjogIjB4MCIsCiAgInRpbWVzdGFtcCI6ICIweDU4ZWU0MGJhIiwKICAiZ2FzTGltaXQiOiAiMHgxZmZmZmZmZmZmZmZmZiIsCiAgImRpZmZpY3VsdHkiOiAiMHgxIiwKICAiZXh0cmFEYXRhIjogIjB4Zjg3ZWEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMGY4NTQ5NDA4NzY3MTk1MjIzODEwMDYxYTM4OWI0MWIyZjRlYTMwOGQwZTlmZGQ5NDkyOGE2NjhiYWE5ZmQ4OTViNzIyZjc4YjJmNGE0MDA0NDlmZWIyN2I5NDFkOTY4YWI0ZGM2YjBiMTg3NGM1MTk2ODUxMjQyNWJlY2E3NjRkODg5NDFkYzQ3ZmI5ZmQyMTQxMDM2YmRmMDEwN2U0NjdlNzY3ZWJmYTBmMjA4MDg0MDAwMDAwMDBjMCIKfQ==
+    genesis: ewogICJjb25maWciOiB7CiAgICAiY2hhaW5JZCI6IDIwMTgsCiAgICAiY29uc3RhbnRpbm9wbGVmaXhibG9jayI6IDAsCiAgICAiY29udHJhY3RTaXplTGltaXQiOiAyMTQ3NDgzNjQ3LAogICAgImliZnQyIjogewogICAgICAiYmxvY2twZXJpb2RzZWNvbmRzIjogMiwKICAgICAgImVwb2NobGVuZ3RoIjogMzAwMDAsCiAgICAgICJyZXF1ZXN0dGltZW91dHNlY29uZHMiOiAxMAogICAgfQogIH0sCiAgIm5vbmNlIjogIjB4MCIsCiAgInRpbWVzdGFtcCI6ICIweDU4ZWU0MGJhIiwKICAiZ2FzTGltaXQiOiAiMHgxZmZmZmZmZmZmZmZmZiIsCiAgImRpZmZpY3VsdHkiOiAiMHgxIiwKICAiZXh0cmFEYXRhIjogIjB4Zjg3ZWEwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMGY4NTQ5NGEwNmRmZTFjMGFmMjExYmRlZTQ1OGU3YWNjNGQ3MTNkYTVjNmFlYTg5NDRhODJhNGVjNjI2ZmMwMzI1ZjgwYmVjYzIwNWE1OTA0YjkyNTU4ZWU5NGMxMGZlYjk5Y2FiMGU0ODBlNGUwNDM2ZDFiYjQ2MmY0OTA0MzQ2ODA5NDY2OGE0OTZjNGFkYmI1NGI4MGQ3Zjc3MGI2Y2Q5ZjViMjQ4ZjdjM2I4MDg0MDAwMDAwMDBjMCIKfQ==
