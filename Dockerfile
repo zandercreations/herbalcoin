@@ -1,11 +1,11 @@
 # USAGE: 
 # docker build . -t baf-build
-# docker run -v $(pwd):/home/blockchain-automation-framework/ baf-build
+# docker run -v $(pwd):/root/blockchain-automation-framework/ baf-build
 
 FROM ubuntu:20.04
 
 # Create working directory
-WORKDIR /home/
+WORKDIR /root/
 ENV PYTHON_VERSION='3.6.13'
 ENV OPENSHIFT_VERSION='0.11.0'
 
@@ -48,10 +48,10 @@ RUN mkdir /etc/ansible/
 RUN /bin/echo -e "[ansible_provisioners:children]\nlocal\n[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
 
 # Copy the provisional script to build container
-COPY ./run.sh /home
-COPY ./reset.sh /home
-RUN chmod 755 /home/run.sh
-RUN chmod 755 /home/reset.sh
+COPY ./run.sh /root
+COPY ./reset.sh /root
+RUN chmod 755 /root/run.sh
+RUN chmod 755 /root/reset.sh
 ENV PATH=/root/bin:/root/.local/bin/:$PATH
 
 # The mounted repo should contain a build folder with the following files
@@ -60,7 +60,7 @@ ENV PATH=/root/bin:/root/.local/bin/:$PATH
 # 3) Private key file which has write-access to the git repo
 
 #path to mount the repo
-VOLUME /home/blockchain-automation-framework/
+VOLUME /root/blockchain-automation-framework/
 
 
-CMD ["/home/run.sh"]
+CMD ["/root/run.sh"]
